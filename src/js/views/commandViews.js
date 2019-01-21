@@ -50,6 +50,7 @@ var CommandPromptView = Backbone.View.extend({
 
   onKeyDown: function(e) {
     // If its a tab, prevent losing focus
+    console.log(e.keyCode + "============down");
     if (e.keyCode === 9) {
       e.preventDefault();
       // Maybe one day do tab completion or something? :O
@@ -74,6 +75,8 @@ var CommandPromptView = Backbone.View.extend({
         this.commandSelectChange(-1);
       }.bind(this)
     };
+
+    console.log(e.keyCode + "============up");
 
     var key = keyboard.mapKeycodeToKey(e.which || e.keyCode);
     if (keyToFuncMap[key] !== undefined) {
