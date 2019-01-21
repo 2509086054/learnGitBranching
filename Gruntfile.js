@@ -187,6 +187,24 @@ module.exports = function(grunt) {
       files: '<config:lint.files>',
       tasks: 'watching'
     },
+    
+    connect: {
+      example: {
+        port: 1337,
+        base: './'
+      },
+      meta: {
+        port: 1338,
+        base: 'tasks'
+      },
+      combined: {
+        port: 1339,
+        combine: [
+          './',
+          'tasks'
+        ]
+      }
+    },
     uglify: {
       build: {
         src: ['build/bundle.js'],
@@ -235,7 +253,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-react');
   grunt.loadNpmTasks('grunt-env');
-
+ 
+  grunt.loadNpmTasks('grunt-connect');
+  
   grunt.registerTask('build',
     ['clean', 'env', 'browserify', 'uglify', 'hash', 'buildIndex', 'shell:gitAdd', 'jasmine_node', 'jshint', 'lintStrings', 'compliment']
   );
@@ -246,4 +266,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['build']);
   grunt.registerTask('test', ['jasmine_node']);
   grunt.registerTask('casperTest', ['shell:casperTest']);
+  
 };
